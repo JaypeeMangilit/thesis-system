@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
+import {ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { App } from "./App"; // if you saved that code in App.jsx
 
 const theme = extendTheme({
@@ -9,9 +9,9 @@ const theme = extendTheme({
       100: "#f7fafc",
         // ...
       900: "#1a202c",
-    }
-  }
-})
+    },
+  },
+});
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
