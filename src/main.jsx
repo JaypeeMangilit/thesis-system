@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import {ChakraProvider, extendTheme } from "@chakra-ui/react";
+import {ChakraProvider} from "@chakra-ui/react";
+import {extendTheme} from "@chakra-ui/theme-utils";
 import { App } from "./App"; // if you saved that code in App.jsx
 
 const theme = extendTheme({
