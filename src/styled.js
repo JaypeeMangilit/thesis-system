@@ -12,7 +12,7 @@ export const Layout = styled.div`
 //sidebar
 export const Sidebar = styled.div`
   width: 250px;
-  background: linear-gradient(180deg, #6a11cb, #2575fc);
+  background: linear-gradient(180deg, #000000ff, #2575fc);
   display: flex;
   flex-direction: column;
   padding: 20px;
