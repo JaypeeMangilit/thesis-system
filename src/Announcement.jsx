@@ -1,9 +1,9 @@
 import { Heading } from "@chakra-ui/react";
 
-export const Finance = () => {
+export const Announcement = () => {
     return (
         <>
-            <Heading>Finance Page</Heading>
+            <Heading>Announcements</Heading>
         </>
     );
 };

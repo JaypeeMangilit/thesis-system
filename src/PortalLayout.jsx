@@ -12,12 +12,12 @@ import { useNavigate, Routes, Route, Link } from "react-router-dom";
 
 import { Layout, Sidebar, Content } from "./styled";
 import { Dashboard } from "./Dashboard";
-import { Students } from "./Students";
-import { Teachers } from "./Teachers";
+import  Students  from "./Students";
+import  Teachers  from "./Teachers";
 import { Classes } from "./Classes";
-import { Attendance } from "./Attendance";
+import { Announcement } from "./Announcement";
 import { Grades } from "./Grades";
-import { Finance } from "./Finance";
+import { Payment } from "./Payment";
 import { Reports } from "./Reports";
 
 export default function PortalLayout() {
@@ -26,7 +26,7 @@ export default function PortalLayout() {
 
   const handleLogout = () => {
     setShowLogoutPopup(false);
-    navigate("/login");
+    navigate("/student-login");
   };
 
   const handleCancel = () => {
@@ -42,9 +42,9 @@ export default function PortalLayout() {
         <Link to="/students">Students</Link>
         <Link to="/teachers">Teachers</Link>
         <Link to="/classes">Classes</Link>
-        <Link to="/attendance">Attendance</Link>
+        <Link to="/announcement">Announcement</Link>
         <Link to="/grades">Grades</Link>
-        <Link to="/finance">Finance</Link>
+        <Link to="/payment">Payment</Link>
         <Link to="/reports">Reports</Link>
         <Button colorScheme="red" onClick={() => setShowLogoutPopup(true)}>
           Logout
@@ -57,9 +57,9 @@ export default function PortalLayout() {
           <Route path="/students" element={<Students />} />
           <Route path="/teachers" element={<Teachers />} />
           <Route path="/classes" element={<Classes />} />
-          <Route path="/attendance" element={<Attendance />} />
+          <Route path="/announcement" element={<Announcement />} />
           <Route path="/grades" element={<Grades />} />
-          <Route path="/finance" element={<Finance />} />
+          <Route path="/payment" element={<Payment />} />
           <Route path="/reports" element={<Reports />} />
         </Routes>
       </Content>

@@ -1,9 +1,9 @@
 import { Heading } from "@chakra-ui/react";
 
-export const Attendance = () => {
+export const Payment = () => {
     return (
         <>
-            <Heading>Attendance Page</Heading>
+            <Heading>Payment Page</Heading>
         </>
     );
 };
