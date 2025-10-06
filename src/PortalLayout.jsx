@@ -13,7 +13,7 @@ import { useNavigate, Routes, Route, Link } from "react-router-dom";
 import { Layout, Sidebar, Content } from "./styled";
 import { Dashboard } from "./Dashboard";
 import  Students  from "./Students";
-import  Teachers  from "./Teachers";
+import  Employee  from "./Employee";
 import { Classes } from "./Classes";
 import { Announcement } from "./Announcement";
 import { Grades } from "./Grades";
@@ -40,7 +40,7 @@ export default function PortalLayout() {
         <h1>School Portal</h1>
         <Link to="/dashboard">Dashboard</Link>
         <Link to="/students">Students</Link>
-        <Link to="/teachers">Teachers</Link>
+        <Link to="/employee">Employee</Link>
         <Link to="/classes">Classes</Link>
         <Link to="/announcement">Announcement</Link>
         <Link to="/grades">Grades</Link>
@@ -55,7 +55,7 @@ export default function PortalLayout() {
         <Routes>
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/students" element={<Students />} />
-          <Route path="/teachers" element={<Teachers />} />
+          <Route path="/employee" element={<Employee />} />
           <Route path="/classes" element={<Classes />} />
           <Route path="/announcement" element={<Announcement />} />
           <Route path="/grades" element={<Grades />} />
