@@ -46,7 +46,7 @@ export default function PortalLayout() {
         <Link to="/grades">Grades</Link>
         <Link to="/payment">Payment</Link>
         <Link to="/reports">Reports</Link>
-        <Button colorScheme="red" onClick={() => setShowLogoutPopup(true)}>
+        <Button colorScheme="red" width="100px" left={59} onClick={() => setShowLogoutPopup(true)}>
           Logout
         </Button>
       </Sidebar>

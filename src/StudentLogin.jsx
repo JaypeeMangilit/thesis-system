@@ -32,12 +32,12 @@ export default function StudentLogin() {
       return;
     }
     setError("");
-    navigate("/dashboard");
+    navigate("/studentportal"); //redirect to student portal dashboard
   };
 
   const handleAdminRedirect = () => {
     setShowAdminPrompt(false);
-    navigate("/login");
+    navigate("/login"); //admin redirectory
   };
 
   const slides = [
