@@ -9,7 +9,14 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate, Routes, Route, Link } from "react-router-dom";
-
+import { HiMail } from 'react-icons/hi';
+import { FaGraduationCap } from 'react-icons/fa';
+import { BsPersonLinesFill } from 'react-icons/bs';
+import { FaSchool } from 'react-icons/fa6';
+import { FaBullhorn } from 'react-icons/fa';
+import { FaMedal } from 'react-icons/fa6';
+import { FaPesoSign } from 'react-icons/fa6';
+import { HiDocumentReport } from 'react-icons/hi';
 import { Layout, Sidebar, Content } from "./styled";
 import { Dashboard } from "./Dashboard";
 import  Students  from "./Students";
@@ -38,15 +45,15 @@ export default function PortalLayout() {
     <Layout>
       <Sidebar>
         <h1>School Portal</h1>
-        <Link to="/dashboard">Dashboard</Link>
-        <Link to="/students">Students</Link>
-        <Link to="/employee">Employee</Link>
-        <Link to="/classes">Classes</Link>
-        <Link to="/announcement">Announcement</Link>
-        <Link to="/grades">Grades</Link>
-        <Link to="/payment">Payment</Link>
-        <Link to="/reports">Reports</Link>
-        <Button colorScheme="red" width="100px" left={59} onClick={() => setShowLogoutPopup(true)}>
+        <Link to="/dashboard"><HiMail/>Dashboard</Link>
+        <Link to="/students"><FaGraduationCap/>Students</Link>
+        <Link to="/employee"><BsPersonLinesFill/>Employee</Link>
+        <Link to="/classes"><FaSchool/>Classes</Link>
+        <Link to="/announcement"><FaBullhorn/>Announcement</Link>
+        <Link to="/grades"><FaMedal/>Grades</Link>
+        <Link to="/payment"><FaPesoSign/>Accounts</Link>
+        <Link to="/reports"><HiDocumentReport/>Reports</Link>
+        <Button colorScheme="red" maxW={450} onClick={() => setShowLogoutPopup(true)}>
           Logout
         </Button>
       </Sidebar>

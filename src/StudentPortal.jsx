@@ -1,7 +1,11 @@
 import { useNavigate, Link, Outlet } from "react-router-dom";
-import { AlertRoot,Box, AlertIndicator, AlertDescription, Stack, AlertTitle, Button} from "@chakra-ui/react";
+import { AlertRoot,Box, AlertIndicator, AlertDescription, Stack, AlertTitle, Button, HStack, Avatar, Text} from "@chakra-ui/react";
 import { useState } from "react";
 import { Layout, Sidebar, Content } from "./styled";
+import { HiMail } from 'react-icons/hi';
+import { FaMedal } from 'react-icons/fa6';
+import { FaCalendarCheck } from 'react-icons/fa';
+import { FaPesoSign } from 'react-icons/fa6';
 
 
 export default function StudentPortal(){
@@ -21,12 +25,19 @@ export default function StudentPortal(){
     return (
         <Layout>
             <Sidebar>
-                <h1>Student Portal</h1>
-                <Link to="dashboard">Dashboard</Link>
-                <Link to="schedule">Schedule</Link>
-                <Link to="grades">Grades</Link>
-                <Link to="accounts">Accounts</Link>
-                <Button onClick={() => setShowLogoutPopup(true) }>Log out</Button>
+                <h1>PathFinder</h1>
+                <Link to="dashboard"><HiMail/>Dashboard</Link>
+                <Link to="schedule"><FaCalendarCheck/>Schedule</Link>
+                <Link to="grades"><FaMedal/>Grades</Link>
+                <Link to="accounts"><FaPesoSign/>Accounts</Link>
+                
+                    <Box>
+                        <Text fontSize="sm">(fullname)</Text>
+                        <Text fontSize="xs" color="gray.300">Administrator</Text>
+                    </Box>
+                    <Button size="sm" colorScheme="red" onClick={() => setShowLogoutPopup(true)}>
+                        Logout
+                    </Button>
             </Sidebar>
 
             <Content>
