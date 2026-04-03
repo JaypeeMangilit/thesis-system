@@ -6,71 +6,134 @@ import {
   Button,
   Stack,
   Box,
+  Spacer,
+  Image,
+  Avatar,
+  HStack,
+  Circle,
+  Float,
+  Text,
+  Heading
 } from "@chakra-ui/react";
-import { useState } from "react";
-import { useNavigate, Routes, Route, Link } from "react-router-dom";
-import { HiMail } from 'react-icons/hi';
-import { FaGraduationCap } from 'react-icons/fa';
-import { BsPersonLinesFill } from 'react-icons/bs';
-import { FaSchool } from 'react-icons/fa6';
-import { FaBullhorn } from 'react-icons/fa';
-import { FaMedal } from 'react-icons/fa6';
-import { FaPesoSign } from 'react-icons/fa6';
-import { HiDocumentReport } from 'react-icons/hi';
+import { useEffect, useState } from "react";
+import { useNavigate, Link, Outlet } from "react-router-dom"; // ADDED: Outlet
+import { IoHome } from "react-icons/io5";
+import { MdOutlineSecurity, MdAccountCircle } from "react-icons/md";
+import { GiTeacher } from "react-icons/gi";
 import { Layout, Sidebar, Content } from "./styled";
-import { Dashboard } from "./Dashboard";
-import  Students  from "./Students";
-import  Employee  from "./Employee";
-import { Classes } from "./Classes";
-import { Announcement } from "./Announcement";
-import { Grades } from "./Grades";
-import { Payment } from "./Payment";
-import { Reports } from "./Reports";
 
 export default function PortalLayout() {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const navigate = useNavigate();
+  const [userName, setUserName] = useState("Employee");
 
   const handleLogout = () => {
     setShowLogoutPopup(false);
-    navigate("/student-login");
+    localStorage.clear(); // Clear session data
+    navigate("/login");
   };
 
   const handleCancel = () => {
     setShowLogoutPopup(false);
-    navigate("/dashboard");
   };
+
+  const Footer = () => (
+    <Box
+      as="footer"
+      width="100%"
+      py="4"
+      borderTop="1px solid"
+      borderColor="gray.200"
+      mt="auto"
+      textAlign="center"
+    >
+      <Text fontSize="xs" color="gray.500">
+        @ 2026 Patnubay School Portal. All Rights Reserved.
+      </Text>
+    </Box>
+  );
+
+  useEffect(() => {
+    const savedName = localStorage.getItem("userName");
+    if (savedName) {
+      setUserName(savedName);
+    }
+  }, []);
 
   return (
     <Layout>
       <Sidebar>
-        <h1>School Portal</h1>
-        <Link to="/dashboard"><HiMail/>Dashboard</Link>
-        <Link to="/students"><FaGraduationCap/>Students</Link>
-        <Link to="/employee"><BsPersonLinesFill/>Employee</Link>
-        <Link to="/classes"><FaSchool/>Classes</Link>
-        <Link to="/announcement"><FaBullhorn/>Announcement</Link>
-        <Link to="/grades"><FaMedal/>Grades</Link>
-        <Link to="/payment"><FaPesoSign/>Accounts</Link>
-        <Link to="/reports"><HiDocumentReport/>Reports</Link>
-        <Button colorScheme="red" maxW={450} onClick={() => setShowLogoutPopup(true)}>
+        <Image
+          src="/PATNUBAY.jpeg"
+          alt="Patnubay Logo"
+          boxSize="50px"
+          borderRadius="full"
+          style={{ marginLeft: "80px" }}
+        />
+        <Heading
+          style={{ marginLeft: '55px' }}
+          fontSize="22px"
+          fontWeight="bold"
+          textShadow="-1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, 1px 1px 0 #000"
+        >
+          Patnubay
+        </Heading>
+
+        <Text
+          fontSize="xl"
+          fontWeight="bold"
+          style={{ marginLeft: "25px" }}
+          textShadow="-1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, 1px 1px 0 #000"
+        >
+          Admin Portal
+        </Text>
+
+        <Spacer />
+        {/* FIXED: Links now include the /admin/ prefix to match App.jsx */}
+        <Link to="/admin/dashboard"><IoHome /> Home</Link>
+        <Link to="/admin/adminstudents"><MdOutlineSecurity /> Students Accounts</Link>
+        <Link to="/admin/teacheraccount"><GiTeacher /> Teacher Accounts</Link>
+        <Link to="/admin/accountsetting"><MdAccountCircle /> Account Setting</Link>
+        <Link to="/admin/report">Reports</Link>
+
+        <Spacer />
+
+        <HStack mb={2}>
+          <Avatar.Root shape="full" size="lg">
+            <Avatar.Fallback name={userName} />
+            <Avatar.Image src="" />
+            <Float placement="bottom-end" offsetX="1" offsetY="1">
+              <Circle
+                bg="green.500"
+                size="8px"
+                outline="0.2em solid"
+                outlineColor="bg"
+              />
+            </Float>
+          </Avatar.Root>
+          <Text>{userName}</Text>
+        </HStack>
+
+        <Button 
+          bg="purple" 
+          maxW={200} 
+          _hover={{ bg: "red", opacity: "0.5", transform: "Scale(1.05)" }} 
+          onClick={() => setShowLogoutPopup(true)}
+        >
           Logout
         </Button>
       </Sidebar>
 
       <Content>
-        <Routes>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/students" element={<Students />} />
-          <Route path="/employee" element={<Employee />} />
-          <Route path="/classes" element={<Classes />} />
-          <Route path="/announcement" element={<Announcement />} />
-          <Route path="/grades" element={<Grades />} />
-          <Route path="/payment" element={<Payment />} />
-          <Route path="/reports" element={<Reports />} />
-        </Routes>
+        {/* CRITICAL FIX: Removed the internal <Routes> block.
+          <Outlet /> tells React Router to render the child components 
+          defined in App.jsx here.
+        */}
+        <Outlet /> 
+        <Footer />
       </Content>
 
+      {/* Logout Popup */}
       {showLogoutPopup && (
         <Box
           position="fixed"
@@ -93,17 +156,27 @@ export default function PortalLayout() {
             w={{ base: "90%", sm: "400px" }}
             boxShadow="xl"
           >
-            <AlertIndicator />
+            <AlertIndicator color="red" />
             <Box flex="1">
-              <AlertTitle fontSize="lg">Are you sure?</AlertTitle>
-              <AlertDescription mt={2}>
-                You're about to log out of the School Portal.
+              <AlertTitle fontSize="lg" color="red">Are you sure?</AlertTitle>
+              <AlertDescription mt={2} color="black">
+                You're about to log out of the Admin Portal.
               </AlertDescription>
               <Stack direction="row" justify="flex-end" mt={6}>
-                <Button colorScheme="orange" onClick={handleCancel}>
+                <Button 
+                  color="white" 
+                  bg="purple.700" 
+                  _hover={{ bg: "gray.500" }}  
+                  onClick={handleCancel}
+                >
                   Cancel
                 </Button>
-                <Button colorScheme="red" onClick={handleLogout}>
+                <Button 
+                  color="white" 
+                  bg="purple.700" 
+                  _hover={{ bg: "red", transform: "scale(1.05)" }}  
+                  onClick={handleLogout}
+                >
                   Confirm Logout
                 </Button>
               </Stack>

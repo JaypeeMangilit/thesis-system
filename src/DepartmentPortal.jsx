@@ -1,51 +1,45 @@
 import { useNavigate, Link,Outlet} from "react-router-dom";
-import { AlertRoot,Box, AlertIndicator, AlertDescription,HStack, Stack, AlertTitle, Button, Avatar, Text, Spacer, Heading, Float, Circle, Image} from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { AlertRoot,Box, HStack, Float, Heading,Circle, AlertIndicator, AlertDescription, Stack, AlertTitle, Button, Avatar, Text, Spacer, Image} from "@chakra-ui/react";
+import { useEffect, useState } from "react";
 import { Layout, Sidebar, Content } from "./styled";
 import { IoMdHome } from "react-icons/io";
-import { FaCalendarCheck } from 'react-icons/fa';
-import { PiCardsThreeDuotone } from "react-icons/pi";
-import { CgProfile } from "react-icons/cg";
 
 
+const Footer = () => (
+    <Box
+        as="footer"
+        width="100%"
+        py="0"
+        borderTop="1px solid"
+        borderColor="gray.200"
+        mt="auto"
+        textAlign="center"
+    >
+        <Text fontSize="xs" color="gray.500">
+            @ 2026 PathFinder School Portal. All Rights Reserved.
+        </Text>
+    </Box>
+);
 
-
-export default function StudentPortal () {
+export default function DepartmentPortal () {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const navigate = useNavigate();
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState("Employee");
 
   const handleLogout = () => {
     setShowLogoutPopup(false);
-    navigate("/student-login");
+    navigate("/login");
   };
 
   const handleCancel = () => {
     setShowLogoutPopup(false);
-    navigate("/studentportal");
+    navigate("departmentdashboard");
   };
 
-
-    const Footer = () => (
-      <Box
-          as="footer"
-          width="100%"
-          py="0"
-          borderTop="1px solid"
-          borderColor="gray.200"
-          mt="auto"
-          textAlign="center"
-      >
-          <Text fontSize="xs" color="gray.500">
-              @ 2026 Patnubay School Portal. All Rights Reserved.
-          </Text>
-      </Box>
-  );
-
-  useEffect(() => {
-    const savedName = localStorage.getItem("studentName");
+  useEffect (() => {
+    const savedName = localStorage.getItem("userName");
     if (savedName) {
-      setUserName(savedName);
+        setUserName(savedName);
     }
   }, []);
 
@@ -55,49 +49,58 @@ export default function StudentPortal () {
                 <Image
                     src="/PATNUBAY.jpeg"
                     alt="Patnubay Logo"
-                    boxSize="60px"
+                    boxSize="50px"
                     borderRadius="full"
                     style={{marginLeft: "80px"}}
+                
                 />
 
-                <Heading 
+                <Heading
+                    style={{ marginLeft: '55px'}}
+                    fontSize="22px"
                     fontWeight="bold"
-                    fontSize="25px"
-                    style={{marginLeft: "55px"}}
-                    textShadow="-1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, 1px 1px 0 #000"
+                    textShadow="-1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px -1px 0 #000,
+                    1px 1px 0 #000
+                    "
                 >Patnubay</Heading>
 
-                <Text fontWeight="bold" 
-                    fontSize="2xl"
-                    style={{marginLeft: "32px"}}
-                    textShadow="-1px -1px 0 #000, -1px 1px 0 #000, 1px -1px 0 #000, 1px 1px 0 #000"
-                >School Portal</Text>
+                <Text
+                    fontSize="xl"
+                    fontWeight="bold"
+                    style={{marginLeft: "25px"}}
+                    textShadow="-1px -1px 0 #000,
+                    -1px 1px 0 #000,
+                    1px -1px 0 #000,
+                    1px 1px 0 #000
+                    "
+                >Academy Portal</Text>
 
                 <Spacer />
-                <Link to="dashboard"><IoMdHome/>Home</Link>
-                <Link to="schedule"><FaCalendarCheck/>Schedule</Link>
-                <Link to="grades"><PiCardsThreeDuotone/>Grades</Link>
-                <Link to="profile"><CgProfile/>Profile</Link>
+                <Link to="departmentdashboard"><IoMdHome/>Home</Link>
+                <Link to="departmentelementary">Deparment Head Elementary</Link>
+                <Link to="departmentjuniorhigh">Department Head Junior High</Link>
+                <Link to="departmentassign">Assign Advisory Teacher</Link>
                 
                 <Spacer />
 
                 <HStack mb={2}>
                     <Avatar.Root shape="full" size="lg">
-                        <Avatar.Fallback />
-                        <Avatar.Image src="" />
-                        <Float placement="bottom-end" offsetX="1" offsetY="1">
-                            <Circle
-                                bg="green.500"
-                                size="8px"
-                                outline="0.2em solid"
-                                outlineColor="bg"
-                            />
-                        </Float>
+                    <Avatar.Fallback name="" />
+                    <Avatar.Image src="" />
+                    <Float placement="bottom-end" offsetX="1" offsetY="1">
+                        <Circle
+                        bg="green.500"
+                        size="8px"
+                        outline="0.2em solid"
+                        outlineColor="bg"
+                        />
+                    </Float>
                     </Avatar.Root>
                     <Text>{userName}</Text>
                 </HStack>
-     
-                    <Button size="sm" _hover={{bg: "red", transform: "scale(1.05)", opacity: "0.5"}} bg="purple.700" color="white" onClick={() => setShowLogoutPopup(true)}>
+                    <Button size="sm" bg="purple.700" color="white"  onClick={() => setShowLogoutPopup(true)} _hover={{bg: "red", transform: "scale(1.05)", opacity: "0.5"}}>
                         Logout
                     </Button>
             </Sidebar>
@@ -133,7 +136,7 @@ export default function StudentPortal () {
                         <Box flex="1">
                             <AlertTitle fontSize="lg" color="red">Are you sure?</AlertTitle>
                             <AlertDescription mt={2} color="black">
-                                You're about to log out of the School Portal?
+                                You're about to log out of the Portal.
                             </AlertDescription>
                             <Stack direction="row" justify="flex-end" mt={6}>
                                 <Button color="white" bg="purple.700" _hover={{bg: "red", transform: "scale(1.05)", opacity: "0.5"}} onClick={handleCancel}>
